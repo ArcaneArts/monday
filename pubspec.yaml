@@ -3,7 +3,7 @@ description: Unofficial Monday API Wrapper
 version: 1.0.0
 repository: https://github.com/ArcaneArts/monday
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.5.2
 dependencies:
   dart_mappable: ^4.3.0
   http: ^1.2.2
