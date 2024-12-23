@@ -113,11 +113,13 @@ class MondayAPI {
     final createdBoardId = createdBoardJson['id'] as String;
 
     for (var col in board.columns) {
+      print('Creating column ${col.title} type ${col.type}');
       await createColumn(
         boardId: createdBoardId,
         title: col.title,
         type: col.type,
       );
+      print("Created Column ${col.title}");
     }
 
     final newBoard = await getBoard(createdBoardId);
@@ -188,7 +190,7 @@ class MondayAPI {
 
     final data = jsonDecode(response.body) as Map<String, dynamic>;
     if (data.containsKey('errors')) {
-      throw Exception('GraphQL Error: ${data['errors']}');
+      throw Exception('GraphQL Error: ${data['errors']}. Request was $query');
     }
 
     return data;
