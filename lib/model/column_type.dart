@@ -19,7 +19,7 @@ enum MondayColumnType {
   long_text,
   mirror,
   doc,
-  name,
+  name, // UNSUPPORTED THROUGH API
   numbers,
   people,
   phone,
