@@ -94,6 +94,7 @@ class MondayAPI {
       mutation {
         create_board(
           board_name: "${board.name}",
+          description: "${board.description}",
           board_kind: private
         ) {
           id
@@ -172,6 +173,35 @@ class MondayAPI {
     final columnJson =
         responseJson['data']['create_column'] as Map<String, dynamic>;
     return MondayColumn.fromJson(columnJson);
+  }
+
+  Future<void> createItemWithColumnData({
+    required String boardId,
+    required String itemName,
+    required List<MondayColumnValue> columnData,
+  }) async {
+    int intBoardId = int.parse(boardId);
+
+    Map<String, dynamic> mergedMap = <String, dynamic>{};
+    for (MondayColumnValue cd in columnData) {
+      mergedMap.addAll(cd.toMap());
+    }
+
+    String columnValuesJson = jsonEncode(mergedMap).replaceAll('"', '\\"');
+    String mutation = '''
+    mutation {
+      create_item(
+        board_id: $intBoardId,
+        item_name: "$itemName",
+        column_values: "$columnValuesJson"
+      ) {
+        id
+        name
+      }
+    }
+  ''';
+
+    await postQuery(mutation);
   }
 
   Future<Map<String, dynamic>> postQuery(String query) async {
