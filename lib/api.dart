@@ -168,6 +168,7 @@ class MondayAPI {
           id
           title
           type
+          description
         }
       }
     ''';
