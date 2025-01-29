@@ -59,6 +59,7 @@ class MondayAPI {
           columns {
             id
             title
+            description
             type
           }
         }
@@ -151,6 +152,7 @@ class MondayAPI {
   Future<MondayColumn> createColumn({
     required String boardId,
     required String title,
+    String description = '',
     required MondayColumnType type,
   }) async {
     int intBoardId = int.parse(boardId);
@@ -160,6 +162,7 @@ class MondayAPI {
         create_column (
           board_id: $intBoardId,
           title: "$title",
+          description: "$description",
           column_type: ${type.name}
         ) {
           id
