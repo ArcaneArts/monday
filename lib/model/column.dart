@@ -17,7 +17,7 @@ class MondayColumn {
     return MondayColumn(
       id: json['id'] as String,
       title: json['title'] as String,
-      description: json['description'] as String,
+      description: (json['description'] as String?) ?? '',
       type: MondayColumnTypeX.fromString(json['type'] as String),
     );
   }
